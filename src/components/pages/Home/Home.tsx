@@ -5,7 +5,14 @@ import DataTable, { SortOrder, TableColumn } from "react-data-table-component";
 import { GenderEnum, IUser } from "@/interfaces/user";
 import produce from "immer";
 import { format } from "date-fns";
-import { Box, Grid, Paper, Select, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Paper,
+  Select,
+  TablePagination,
+  useMediaQuery,
+} from "@mui/material";
 import { Gender } from "@/components/molecules/Gender";
 import { mutate } from "swr";
 import { Reset } from "@/components/molecules/Reset/Reset";
@@ -49,29 +56,33 @@ const columns: TableColumn<IUser>[] = [
 export const Home: React.FC<HomeProps> = () => {
   const matched = useMediaQuery("(max-width: 900px)");
   const [queryString, setQueryString] = useState<Record<string, string>>({});
-  const [isReset, setReset] = useState<boolean>(false)
-  const { users, refetch } = useUser(queryString);
+  const [isReset, setReset] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(0);
+  const [rowPerPage, setRowPerPage] = useState<number>(10);
+  const { users } = useUser(queryString);
   useEffect(() => {
-    console.log(users)
-  }, [users])
+    console.log(users);
+  }, [users]);
 
-  const boxStyle = useMemo(() => (matched
-    ? {
-        display: "grid",
-        gridTemplateRows: "repeat(3, 1fr)",
-        gridTemplateColumn: "1fr",
-        gridRowGap: "1rem",
-      }
-    : {
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gridTemplateRows: "1fr",
-        gridColumnGap: "1rem",
-      }), [matched])
+  const boxStyle = useMemo(
+    () =>
+      matched
+        ? {
+            display: "grid",
+            gridTemplateRows: "repeat(3, 1fr)",
+            gridTemplateColumn: "1fr",
+            gridRowGap: "1rem",
+          }
+        : {
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateRows: "1fr",
+            gridColumnGap: "1rem",
+          },
+    [matched]
+  );
 
-  const mutateQueryString = (
-    fields: { key: string; value: string }[]
-  ) => {
+  const mutateQueryString = (fields: { key: string; value: string }[]) => {
     setQueryString((oldQueryString) =>
       produce(oldQueryString, (draftOldQueryString) => {
         fields.forEach((field) => {
@@ -105,11 +116,36 @@ export const Home: React.FC<HomeProps> = () => {
     }
   };
 
+  const handlePageChange: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    page: number
+  ) => void = (_, page) => {
+    setPage(page);
+  };
+
+  const handleRowPerPageChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement
+  > = (event) => {
+    const value = +event.target.value;
+    setRowPerPage(value);
+  };
+
+  useEffect(() => {
+    if (Number.isInteger(page)) {
+      mutateQueryString([{ key: "page", value: `${page + 1}` }]);
+    }
+    if (Number.isInteger(rowPerPage)) {
+      mutateQueryString([{ key: "results", value: `${rowPerPage}` }]);
+    }
+  }, [page, rowPerPage])
+
   const handleClickReset = () => {
     setQueryString({});
-    setReset(true)
+    setPage(0);
+    setRowPerPage(10);
+    setReset(true);
     setTimeout(() => {
-      setReset(false) 
+      setReset(false);
     });
   };
 
@@ -132,6 +168,15 @@ export const Home: React.FC<HomeProps> = () => {
         sortServer
         keyField="email"
         theme="dark"
+      />
+      <TablePagination
+        component="div"
+        count={100}
+        page={page}
+        onPageChange={handlePageChange}
+        rowsPerPage={rowPerPage}
+        onRowsPerPageChange={handleRowPerPageChange}
+        sx={{ marginTop: "1rem" }}
       />
     </Paper>
   );
