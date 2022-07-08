@@ -1,0 +1,42 @@
+{
+  "results": [
+    {
+      "gender": "female",
+      "name": { "title": "Mrs", "first": "Dolores", "last": "Cruz" },
+      "location": {
+        "street": { "number": 3914, "name": "Calle de La Almudena" },
+        "city": "Alicante",
+        "state": "Cantabria",
+        "country": "Spain",
+        "postcode": 55290,
+        "coordinates": { "latitude": "-30.2950", "longitude": "174.6409" },
+        "timezone": {
+          "offset": "+9:00",
+          "description": "Tokyo, Seoul, Osaka, Sapporo, Yakutsk"
+        }
+      },
+      "email": "dolores.cruz@example.com",
+      "login": {
+        "uuid": "425e6704-8599-49ba-9db3-0bd51fc0dec1",
+        "username": "brownbear758",
+        "password": "rangers1",
+        "salt": "tJMMSNv2",
+        "md5": "467874ef55b4b4635001e6bc2d1d2727",
+        "sha1": "e7b62012e95dc39ce11168bba4818dc15d254ec4",
+        "sha256": "d01884c7567438e959f027c30570f5639dda202e4bfa2d79089c1ce4a31e0600"
+      },
+      "dob": { "date": "1990-10-20T10:47:37.020Z", "age": 31 },
+      "registered": { "date": "2009-09-29T20:09:01.651Z", "age": 12 },
+      "phone": "997-089-716",
+      "cell": "697-096-726",
+      "id": { "name": "DNI", "value": "78581655-M" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/6.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/6.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/6.jpg"
+      },
+      "nat": "ES"
+    }
+  ],
+  "info": { "seed": "jefrydco", "results": 1, "page": 1, "version": "1.4" }
+}

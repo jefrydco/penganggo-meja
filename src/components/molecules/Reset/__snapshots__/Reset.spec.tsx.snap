@@ -1,0 +1,17 @@
+// Vitest Snapshot v1
+
+exports[`Reset > match snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-sghohy-MuiButtonBase-root-MuiButton-root"
+    role="button"
+    tabindex="0"
+    type="button"
+  >
+    Reset
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </button>
+</DocumentFragment>
+`;
