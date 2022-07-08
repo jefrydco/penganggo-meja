@@ -2,6 +2,13 @@
 
 > React app demo for displaying table with filter, sort and search
 
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Technology](#technology)
+- [Test Result](#test-result)
+- [Performance](#performance)
+
 ## Getting Started
 
 ```sh
@@ -34,3 +41,15 @@ yarn coverage
 - [React Testing Library](https://testing-library.com/)
 - [Material UI](https://mui.com/)
 - [React Data Table](https://react-data-table-component.netlify.app/)
+
+## Test Result
+
+Unit test result as of 8 July 2022:
+
+![Unit Test Result](./images/unit-test.png)
+
+## Performance
+
+Performance as of 8 July 2022:
+
+![PageSpeed](./images/pagespeed.png)
